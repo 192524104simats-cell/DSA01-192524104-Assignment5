@@ -1,0 +1,13 @@
+ALGORITHM CalculatePayerCoverage
+
+BEGIN
+    INPUT bill
+    INPUT payer
+
+    SET amount = bill.total()
+    SET covered = payer.amountCovered(bill)
+
+    DISPLAY "Bill Amount = ", amount
+    DISPLAY "Amount Covered = ", covered
+    DISPLAY "Patient Payment = ", amount - covered
+END
