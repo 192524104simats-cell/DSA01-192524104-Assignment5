@@ -1,0 +1,14 @@
+ALGORITHM CalculateDailyTotal
+
+BEGIN
+    DECLARE sum AS REAL
+    SET sum = 0
+
+    FOR EACH bill IN bills DO
+        DISPLAY bill.type()
+        DISPLAY bill.print()
+        sum = sum + bill.total()
+    END FOR
+
+    DISPLAY "Daily Total = ", sum
+END
