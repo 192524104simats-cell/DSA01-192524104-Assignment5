@@ -1,0 +1,32 @@
+# B2 – Exception Handling Test Results
+
+## Compilation
+Command:
+g++ -std=c++17 -Wall -Wextra Task07/B2_Exception_Test.cpp -o Task07/B2_Exception_Test.exe
+
+Result: Successful compilation with no warnings.
+
+## Test Results
+
+| Test | Input / Condition | Observed Result |
+|---|---|---|
+| Negative charge | -500 | Negative bill amount error |
+| Invalid claim | 5000, limit 3000 | Claim exceeds coverage limit |
+| Unknown package | Gold | Unknown package error |
+| Invalid numeric input | abc | stod error |
+| Memory allocation | Simulated bad_alloc | Memory error caught |
+| Catch all | Integer exception | Unknown error caught |
+| Rethrowing | Billing failure | Logged and handled again |
+
+## Observation
+- Invalid charges and claims are rejected.
+- Invalid numeric input is caught.
+- Memory allocation exceptions are handled.
+- `catch(...)` handles unknown exception types.
+- `throw;` successfully rethrows the original exception.
+
+## Conclusion
+Exception handling safely detects and handles different billing errors. Rethrowing allows errors to be logged and handled at a higher level.
+
+## Note
+The memory allocation test simulates `std::bad_alloc`; it does not exhaust actual system memory.
