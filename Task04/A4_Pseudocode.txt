@@ -1,0 +1,20 @@
+ALGORITHM ProcessBill
+
+BEGIN
+    INPUT billAmount
+
+    TRY
+        IF billAmount < 0 THEN
+            THROW InvalidCharge
+        END IF
+
+        DISPLAY "Bill Amount = ", billAmount
+
+    CATCH InvalidCharge
+        DISPLAY "Error: Bill amount cannot be negative"
+
+    CATCH std::exception
+        DISPLAY "Billing Error Occurred"
+
+    END TRY
+END
