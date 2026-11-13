@@ -1,0 +1,25 @@
+# B1 – Billing System Test Results
+
+## Compilation
+Command:
+g++ -std=c++17 -Wall -Wextra Task06/B1_Billing_System.cpp -o Task06/B1_Billing_System.exe
+
+Result: Successful compilation with no warnings.
+
+## Test Cases
+
+| Bill Type | Bill Amount | SelfPay | Insurance (80%) | Government |
+|---|---:|---:|---:|---:|
+| OutPatient | 500 | 500 | 400 | 400 |
+| InPatient | 2000 | 2000 | 1600 | 1500 |
+| DayCare | 1000 | 1000 | 800 | 800 |
+| Emergency | 3000 | 3000 | 2400 | 2500 |
+
+## Observation
+- SelfPay covers the complete bill.
+- Insurance covers 80% of the bill.
+- GovernmentScheme covers fixed amounts based on bill type.
+- All 12 bill-payer combinations produced the expected results.
+
+## Conclusion
+Runtime polymorphism successfully calculates the amount covered by each payer for all four bill types.
