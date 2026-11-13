@@ -1,0 +1,14 @@
+ALGORITHM ProcessBilling
+
+BEGIN
+    TRY
+        CALL processBill()
+        DISPLAY "Bill processed successfully"
+
+    CATCH std::exception AS error
+        DISPLAY "Error: ", error.what()
+        CALL logError(error)
+        DISPLAY "Recovering from billing error"
+
+    END TRY
+END
