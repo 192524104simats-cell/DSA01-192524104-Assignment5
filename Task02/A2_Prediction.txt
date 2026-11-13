@@ -1,0 +1,47 @@
+# A2 – OUTPUT PREDICTION
+
+Predicted output:
+
+```text
+500 ~OPBill ~Bill
+```
+
+Explanation:
+
+1. `b->show()` calls the non-virtual `show()` function.
+2. Inside `show()`, the virtual `total()` function calls `OPBill::total()`.
+3. It returns 500.
+4. When `delete b` executes, the derived destructor runs first.
+5. Then the base destructor runs.
+6. A newline is printed.
+
+
+Actual Output:
+500 ~OPBill ~Bill
+
+Result:
+The predicted output matches the actual output.
+Runtime polymorphism correctly calls OPBill::total().
+The derived destructor executes before the base destructor.
+
+
+## Destructor Experiment
+
+Original output with virtual destructor:
+```text
+500 ~OPBill ~Bill
+```
+
+Actual output without virtual destructor:
+```text
+500 ~Bill
+```
+
+Compiler warning:
+Deleting an object through a base-class pointer with a non-virtual destructor causes undefined behaviour.
+
+AddressSanitizer:
+Compilation failed because the MinGW installation does not contain the required libasan library.
+
+Conclusion:
+A virtual destructor is necessary for safe deletion of derived objects through base-class pointers. The observed output without it is not guaranteed because the behaviour is undefined.
