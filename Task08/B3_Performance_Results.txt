@@ -1,0 +1,50 @@
+# B3 – Performance Investigation Results
+
+## 1. Virtual Polymorphism vs Switch
+
+| Number of Bills | Virtual (µs) | Switch (µs) |
+|---:|---:|---:|
+| 1,000 | 3 | 1 |
+| 1,000,000 | 2969 | 1489 |
+| 10,000,000 | 17412 | 6615 |
+
+Observation: Switch was faster in these tests. Both methods produced matching checksums.
+
+## 2. Exception Handling vs Return Codes
+
+| Invalid Input | Return Code (µs) | Exception (µs) |
+|---:|---:|---:|
+| 0% | 1277 | 1953 |
+| 1% | 990 | 26443 |
+| 50% | 980 | 1100046 |
+
+Observation:
+- Return codes were faster in all three tests.
+- Exception handling became much slower as invalid inputs increased.
+- Exceptions are better suited to unexpected errors rather than frequent normal conditions.
+
+## 3. std::variant and std::visit
+
+| Test | Result |
+|---|---:|
+| Number of bills | 10,000,000 |
+| Execution time | 8001 µs |
+| Checksum | 16,250,000,000 |
+
+Observation: `std::variant` with `std::visit` successfully processed 10 million bills.
+
+## 4. Overall Comparison
+
+| Method | Advantage | Disadvantage |
+|---|---|---|
+| Virtual functions | Easy extension using inheritance | Some runtime dispatch overhead |
+| Switch | Simple and fast in this test | Must modify switch for new types |
+| Exceptions | Separates error handling | Expensive when frequently thrown |
+| Return codes | Fast for expected errors | Requires checking return values |
+| std::variant | Type-safe alternative to virtual functions | New types require updating the variant |
+
+## Conclusion
+
+The experiment shows that switch statements were faster than virtual calls in this test. Return codes were considerably faster than exceptions when errors occurred frequently. `std::variant` provided another type-safe method for processing different bill types.
+
+Note: Timings depend on hardware, compiler optimizations and system load. These measurements are from one execution and are not universal performance guarantees.
