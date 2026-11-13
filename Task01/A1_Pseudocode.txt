@@ -6,7 +6,7 @@ BEGIN
 
     FOR EACH bill IN bills DO
         DISPLAY bill.type()
-        DISPLAY bill.print()
+        CALL bill.print()
         sum = sum + bill.total()
     END FOR
 
